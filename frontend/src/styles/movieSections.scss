@@ -1,0 +1,317 @@
+.section {
+  padding: 3% 5%;
+  box-sizing: border-box;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  color: var(--text-primary);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.section-see-more {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: gap 0.2s;
+
+  &:hover {
+    gap: 0.5rem;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// ============================
+// UFUQI SCROLL LIST
+// ============================
+.scroll-row-wrapper {
+  position: relative;
+}
+
+.scroll-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 0.5rem;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+  }
+}
+
+.scroll-arrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.25s, transform 0.2s;
+
+  &:hover {
+    background: var(--accent);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  &.left {
+    left: -18px;
+  }
+
+  &.right {
+    right: -18px;
+  }
+}
+
+// ============================
+// MOVIE CARD
+// ============================
+.movie-card {
+  position: relative;
+  flex-shrink: 0;
+  width: 150px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s;
+
+  &:hover {
+    transform: translateY(-6px);
+  }
+}
+
+.movie-card-poster {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  background: var(--bg-secondary);
+}
+
+.movie-card-wishlist-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(13, 13, 31, 0.7);
+  backdrop-filter: blur(4px);
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.added {
+    background: var(--accent);
+  }
+}
+
+.movie-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.6rem;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.85), transparent);
+  opacity: 0;
+  transition: opacity 0.25s;
+
+  .movie-card:hover & {
+    opacity: 1;
+  }
+
+  h4 {
+    color: #ffffff;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// ============================
+// JANR FILTR PILL-LERI
+// ============================
+.genre-pills-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.3rem;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+}
+
+.genre-pill-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.genre-pill {
+  flex-shrink: 0;
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+
+  &:hover {
+    border-color: var(--accent);
+  }
+
+  &.active {
+    background: #e6317a;
+    border-color: #e6317a;
+    color: #ffffff;
+  }
+}
+
+// ============================
+// AWARDS BANNER
+// ============================
+.awards-banner {
+  position: relative;
+  margin: 3% 5%;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(100deg, #d4a017 0%, #f0c040 100%);
+}
+
+.awards-banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 5%;
+}
+
+.awards-banner-title {
+  color: #1a1200;
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+}
+
+.awards-banner-tag {
+  display: inline-block;
+  margin-top: 1rem;
+  background: rgba(13, 13, 31, 0.75);
+  color: #ffffff;
+  padding: 0.6rem 1.4rem;
+  border-radius: 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.awards-banner-posters {
+  position: absolute;
+  right: 5%;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.8rem;
+  z-index: 1;
+
+  img {
+    height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+// ============================
+// RESPONSIVE
+// ============================
+@media (max-width: 600px) {
+  .section {
+    padding: 5% 4%;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .movie-card {
+    width: 120px;
+  }
+
+  .movie-card-poster {
+    height: 175px;
+  }
+
+  .scroll-arrow {
+    display: none;
+  }
+
+  .awards-banner {
+    height: 150px;
+  }
+
+  .awards-banner-title {
+    font-size: 1.3rem;
+  }
+
+  .awards-banner-posters {
+    display: none;
+  }
+}

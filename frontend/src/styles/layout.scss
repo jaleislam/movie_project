@@ -1,0 +1,256 @@
+// ============================
+// HEADER
+// ============================
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  padding: 1.2% 5% 0;
+  box-sizing: border-box;
+}
+
+.header-inner {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2%;
+  background: var(--bg-header);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 40px;
+  box-sizing: border-box;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.header-logo-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.header-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.25s;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.25s;
+  }
+
+  &:hover,
+  &.active {
+    color: var(--text-primary);
+  }
+
+  &.active::after {
+    width: 100%;
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  flex-shrink: 0;
+}
+
+.header-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  transition: color 0.25s, transform 0.2s;
+
+  &:hover {
+    color: var(--text-primary);
+    transform: translateY(-1px);
+  }
+}
+
+.header-notif-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff5a7a;
+  border: 1.5px solid var(--bg-secondary);
+}
+
+.header-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 0;
+  z-index: 60;
+}
+
+// ============================
+// FOOTER
+// ============================
+.footer {
+  width: 100%;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 4% 5%;
+  box-sizing: border-box;
+  text-align: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem 2.2rem;
+  margin-bottom: 4%;
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.25s;
+
+  &:hover {
+    color: var(--accent);
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+  }
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.footer-social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--text-primary);
+  color: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// ============================
+// RESPONSIVE
+// ============================
+@media (max-width: 900px) {
+  .header-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1.6rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  .header-burger {
+    display: flex;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 3% 4% 0;
+  }
+
+  .header-inner {
+    padding: 0 4%;
+  }
+
+  .header-actions {
+    gap: 0.7rem;
+  }
+
+  .footer-links {
+    gap: 0.9rem 1.4rem;
+  }
+
+  .footer-social-icon {
+    width: 36px;
+    height: 36px;
+  }
+}

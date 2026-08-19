@@ -1,0 +1,391 @@
+.auth-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a2e;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+// ============================
+// ARXA FON ZERRECIKLERI
+// ============================
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: -10%;
+  border-radius: 50%;
+  background: rgba(79, 179, 255, 0.5);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.auth-card {
+  width: 70%;
+  max-width: 900px;
+  height: 85%;
+  display: flex;
+  background: #0d0d1f;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1;
+  animation: cardFadeIn 0.5s ease;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-back {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-decoration: none;
+  z-index: 10;
+  transition: transform 0.25s, color 0.25s;
+
+  &:hover {
+    transform: translateX(-4px);
+    color: #4fb3ff;
+  }
+}
+
+// --- Sol teref: form hissesi ---
+.auth-form-panel {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5% 8%;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.auth-title {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 5%;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 8%;
+}
+
+.auth-tab {
+  color: #7a7a9d;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+
+  &:hover {
+    color: #4fb3ff;
+  }
+
+  &.active {
+    color: #4fb3ff;
+    border-bottom-color: #4fb3ff;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+// --- Input + goz ikonu ucun wrapper ---
+.auth-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.auth-input {
+  width: 100%;
+  height: 45px;
+  background: #1a1a2e;
+  border: 1px solid #33334d;
+  border-radius: 6px;
+  padding: 0 4%;
+  color: #ffffff;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+
+  &::placeholder {
+    color: #6b6b8a;
+  }
+
+  &:hover {
+    border-color: #4a4a6a;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #4fb3ff;
+    box-shadow: 0 0 0 3px rgba(79, 179, 255, 0.15);
+  }
+}
+
+.auth-input--password {
+  padding-right: 12%;
+}
+
+.auth-eye-btn {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b6b8a;
+  transition: color 0.25s;
+
+  &:hover {
+    color: #4fb3ff;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.auth-forgot {
+  color: #7a7a9d;
+  font-size: 0.8rem;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: color 0.25s;
+
+  &:hover {
+    color: #4fb3ff;
+  }
+}
+
+.auth-submit-btn {
+  width: 40%;
+  min-width: 120px;
+  height: 42px;
+  background: #4fb3ff;
+  border: none;
+  border-radius: 20px;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.25s, transform 0.15s, box-shadow 0.25s;
+
+  &:hover:not(:disabled) {
+    background: #3a9ee6;
+    box-shadow: 0 6px 18px rgba(79, 179, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.auth-error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+// --- Sag teref: sekil hissesi ---
+.auth-image-panel {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.auth-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// --- Ugur / avatar ekranlari ---
+.auth-success {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 5%;
+  box-sizing: border-box;
+  animation: cardFadeIn 0.4s ease;
+}
+
+.auth-avatar-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #4fb3ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.auth-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-success-text {
+  color: #ffffff;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.auth-username-text {
+  color: #9a9ac0;
+  font-size: 0.9rem;
+}
+
+.auth-avatar-grid {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.auth-avatar-option {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: #1a1a2e;
+  border: 2px solid #33334d;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.2s;
+
+  &:hover {
+    transform: scale(1.08);
+    border-color: #4a4a6a;
+  }
+
+  &.selected {
+    border-color: #4fb3ff;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// ============================
+// RESPONSIVE
+// ============================
+
+@media (max-width: 900px) {
+  .auth-card {
+    width: 85%;
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-page {
+    height: auto;
+    min-height: 100vh;
+    padding: 6% 0;
+  }
+
+  .auth-card {
+    width: 92%;
+    height: auto;
+    min-height: auto;
+    flex-direction: column;
+  }
+
+  .auth-form-panel {
+    width: 100%;
+    padding: 8% 6%;
+  }
+
+  .auth-image-panel {
+    display: none;
+  }
+
+  .auth-title {
+    font-size: 1.5rem;
+  }
+
+  .auth-submit-btn {
+    width: 60%;
+  }
+}

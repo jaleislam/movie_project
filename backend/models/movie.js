@@ -37,6 +37,9 @@ const movieSchema = new mongoose.Schema(
     duration: {
       type: Number,
     },
+        trailerUrl: {
+      type: String,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

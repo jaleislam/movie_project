@@ -1,0 +1,41 @@
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import "../styles/faqPage.scss";
+
+const FAQ_ITEMS = [
+  { question: "What is FilmSayti?", answer: "FilmSayti is a platform where you can discover movies and series, save them to your wishlist, and explore curated collections." },
+  { question: "How do I create an account?", answer: "Click Signup in the header, fill in your details, choose a profile avatar, and you're ready to go." },
+  { question: "Can I cancel my subscription anytime?", answer: "Yes, all plans can be cancelled at any time with no extra fees." },
+  { question: "Is FilmSayti Good For Kids & Families?", answer: "Yes, we provide content ratings and filters to help families choose age-appropriate titles." },
+  { question: "How much Does FilmSayti Cost?", answer: "We offer flexible pricing plans starting from our Basic plan — check the Pricing page for details." },
+  { question: "How do I Get Help If I Have Any Issues?", answer: "You can reach out to our support team through the contact page or email us directly." },
+];
+
+const FaqPage = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+  const toggle = (i) => setOpenIndex(openIndex === i ? null : i);
+
+  return (
+    <div className="faq-page">
+      <h1 className="faq-page-title">Frequently Asked Questions</h1>
+      <p className="faq-page-subtitle">Everything you need to know about FilmSayti</p>
+
+      <div className="faq-list">
+        {FAQ_ITEMS.map((item, index) => (
+          <div key={item.question} className="faq-item">
+            <button
+              className={`faq-question ${openIndex === index ? "open" : ""}`}
+              onClick={() => toggle(index)}
+            >
+              {item.question}
+              <ChevronDown size={18} />
+            </button>
+            <div className={`faq-answer ${openIndex === index ? "open" : ""}`}>{item.answer}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default FaqPage;

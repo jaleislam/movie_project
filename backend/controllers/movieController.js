@@ -14,9 +14,10 @@ export const getMovies = async (req, res) => {
       : {};
 
     // Janr filtri — istəyə bağlı
-    const genreQuery = req.query.genre ? { genre: req.query.genre } : {};
+       const genreQuery = req.query.genre ? { genre: req.query.genre } : {};
+    const yearQuery = req.query.year ? { year: Number(req.query.year) } : {};
 
-    const filter = { ...searchQuery, ...genreQuery };
+    const filter = { ...searchQuery, ...genreQuery, ...yearQuery };
 
     const totalMovies = await Movie.countDocuments(filter);
 
