@@ -18,7 +18,7 @@ const TrendingSection = () => {
         const data = await getMovies({ limit: 10, page: 1 });
         setMovies(data.movies);
       } catch (error) {
-        console.error("Filmler yuklenmedi:", error);
+        console.error(error);
       }
 
       if (user) {
@@ -26,17 +26,15 @@ const TrendingSection = () => {
           const wishlist = await getWishlist();
           setWishlistIds(wishlist.map((m) => m._id));
         } catch (error) {
-          console.error("Wishlist yuklenmedi:", error);
+          console.error(error);
         }
       }
     };
-
     fetchData();
   }, [user]);
 
   const handleToggleWishlist = async (movieId) => {
-    if (!user) return; // login olmayanlar ucun sonra bildiris elave ede bilerik
-
+    if (!user) return;
     try {
       if (wishlistIds.includes(movieId)) {
         await removeFromWishlist(movieId);
@@ -46,7 +44,7 @@ const TrendingSection = () => {
         setWishlistIds((prev) => [...prev, movieId]);
       }
     } catch (error) {
-      console.error("Wishlist xetasi:", error);
+      console.error(error);
     }
   };
 

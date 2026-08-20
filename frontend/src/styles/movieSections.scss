@@ -228,54 +228,146 @@
 // ============================
 .awards-banner {
   position: relative;
-  margin: 3% 5%;
-  border-radius: 16px;
-  overflow: hidden;
-  height: 200px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 1100px;
+  height: 220px;
+  border-radius: 20px;
+  background-color: #d89e18;
   display: flex;
   align-items: center;
-  background: linear-gradient(100deg, #d4a017 0%, #f0c040 100%);
+  justify-content: space-between;
+  padding: 0 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  // Sol Loqo və Heykəl sahəsi
+  &-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1;
+  }
+
+  &-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      margin: 0;
+      color: #12100e;
+      font-family: "Arial Black", "Impact", sans-serif;
+      font-size: 2.2rem;
+      line-height: 0.88;
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+
+    .awards-text {
+      position: relative;
+      letter-spacing: 2px;
+      
+      span {
+        font-size: 0.8rem;
+        position: absolute;
+        top: 2px;
+        margin-left: 2px;
+      }
+    }
+  }
+
+  .awards-trophy {
+    width: 50px;
+    height: 140px;
+    color: #12100e;
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Sağ Posterlər
+  &-posters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+    z-index: 1;
+
+    .poster-frame {
+      width: 105px;
+      height: 155px;
+      background: #4a2211;
+      border: 3px solid #b8860b;
+      outline: 2px solid #5c3a21;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+  }
+
+  // Şəkildəki ortadan keçən şəffaf pill
+  &-tag {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 30, 30, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 10px 45px;
+    border-radius: 30px;
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    span {
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+  }
 }
 
-.awards-banner-content {
-  position: relative;
-  z-index: 2;
-  padding: 0 5%;
-}
+// Mobil responsivlik
+@media (max-width: 768px) {
+  .awards-banner {
+    height: auto;
+    min-height: 200px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
 
-.awards-banner-title {
-  color: #1a1200;
-  font-size: 2.2rem;
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: 0.5px;
-}
+    &-posters {
+      width: 100%;
+      justify-content: center;
+    }
 
-.awards-banner-tag {
-  display: inline-block;
-  margin-top: 1rem;
-  background: rgba(13, 13, 31, 0.75);
-  color: #ffffff;
-  padding: 0.6rem 1.4rem;
-  border-radius: 24px;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.awards-banner-posters {
-  position: absolute;
-  right: 5%;
-  top: 0;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  gap: 0.8rem;
-  z-index: 1;
-
-  img {
-    height: 90%;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    &-tag {
+      position: static;
+      transform: none;
+      width: 100%;
+      text-align: center;
+      padding: 8px 0;
+      box-sizing: border-box;
+    }
   }
 }
 

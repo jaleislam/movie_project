@@ -23,7 +23,7 @@ const SeriesSection = () => {
         const data = await getMovies(params);
         setMovies(data.movies);
       } catch (error) {
-        console.error("Yuklenme xetasi:", error);
+        console.error(error);
       }
     };
     fetchMovies();
@@ -67,10 +67,7 @@ const SeriesSection = () => {
       </div>
 
       <div className="genre-pills-wrapper">
-        <button
-          className={`genre-pill ${!activeGenre ? "active" : ""}`}
-          onClick={() => setActiveGenre(null)}
-        >
+        <button className={`genre-pill ${!activeGenre ? "active" : ""}`} onClick={() => setActiveGenre(null)}>
           All
         </button>
         {GENRES.map((genre) => (

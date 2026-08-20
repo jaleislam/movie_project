@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 
 import {
@@ -49,6 +49,12 @@ const SOCIALS = [
 ];
 
 const Footer = () => {
+  const location = useLocation();
+
+  if (["/login", "/register"].includes(location.pathname)) {
+    return null;
+  }
+
   return (
     <footer className="footer">
       <div className="footer-links">

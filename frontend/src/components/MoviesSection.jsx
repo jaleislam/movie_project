@@ -1,26 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useSelector } from "react-redux";
 import { getMovies } from "../services/movieService";
 import { getWishlist, addToWishlist, removeFromWishlist } from "../services/wishlistService";
 import MovieCard from "./MovieCard";
 import ScrollRow from "./ScrollRow";
 
-const GENRES = [
-  "Drama",
-  "Action",
-  "Adventure",
-  "Romance",
-  "Fantasy",
-  "Comedy",
-  "Animation",
-  "Thriller",
-  "Mystery",
-  "Crime",
-  "Sci-Fi",
-  "Horror",
-];
+const GENRES = ["Drama", "Action", "Adventure", "Romance", "Fantasy", "Comedy", "Animation", "Thriller", "Mystery", "Crime", "Sci-Fi", "Horror"];
 
 const MoviesSection = () => {
   const [movies, setMovies] = useState([]);
@@ -36,10 +23,9 @@ const MoviesSection = () => {
         const data = await getMovies(params);
         setMovies(data.movies);
       } catch (error) {
-        console.error("Filmler yuklenmedi:", error);
+        console.error(error);
       }
     };
-
     fetchMovies();
   }, [activeGenre]);
 
@@ -50,16 +36,14 @@ const MoviesSection = () => {
         const wishlist = await getWishlist();
         setWishlistIds(wishlist.map((m) => m._id));
       } catch (error) {
-        console.error("Wishlist yuklenmedi:", error);
+        console.error(error);
       }
     };
-
     fetchWishlist();
   }, [user]);
 
   const handleToggleWishlist = async (movieId) => {
     if (!user) return;
-
     try {
       if (wishlistIds.includes(movieId)) {
         await removeFromWishlist(movieId);
@@ -69,7 +53,7 @@ const MoviesSection = () => {
         setWishlistIds((prev) => [...prev, movieId]);
       }
     } catch (error) {
-      console.error("Wishlist xetasi:", error);
+      console.error(error);
     }
   };
 
@@ -83,10 +67,7 @@ const MoviesSection = () => {
       </div>
 
       <div className="genre-pills-wrapper">
-        <button
-          className={`genre-pill ${!activeGenre ? "active" : ""}`}
-          onClick={() => setActiveGenre(null)}
-        >
+        <button className={`genre-pill ${!activeGenre ? "active" : ""}`} onClick={() => setActiveGenre(null)}>
           All
         </button>
         {GENRES.map((genre) => (

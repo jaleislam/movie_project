@@ -1,6 +1,6 @@
 import MovieBrowsePage from "../components/MovieBrowsePage";
 import "../styles/browsePage.scss";
 
-const MoviesPage = () => <MovieBrowsePage title="Movies" />;
+const MoviesPage = () => <MovieBrowsePage />;
 
 export default MoviesPage;

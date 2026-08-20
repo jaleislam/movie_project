@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, clearError } from "../redux/slices/authSlice";
 import Particles from "../components/Particles";
+import AuthArt from "../components/AuthArt";
 import "../styles/auth.scss";
 
 const EyeIcon = ({ open }) => (
@@ -22,13 +23,23 @@ const EyeIcon = ({ open }) => (
 );
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const location = useLocation();
+  const redirectTo = location.state?.redirectTo || "/";
+
+  const [formData, setFormData] = useState({
+    email: location.state?.prefillEmail || "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [step, setStep] = useState("form"); // "form" | "success"
+  const [step, setStep] = useState("form");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, error, user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,7 +52,7 @@ const Login = () => {
 
     if (login.fulfilled.match(result)) {
       setStep("success");
-      setTimeout(() => navigate("/"), 1500);
+      setTimeout(() => navigate(redirectTo), 1200);
     }
   };
 
@@ -65,6 +76,10 @@ const Login = () => {
                   SIGNUP
                 </Link>
               </div>
+
+              {location.state?.prefillEmail && (
+                <p className="auth-info-note">Hesabin yaradildi, indi sifreni yaz</p>
+              )}
 
               {error && <p className="auth-error">{error}</p>}
 
@@ -112,9 +127,6 @@ const Login = () => {
             </>
           ) : (
             <div className="auth-success">
-              <div className="auth-avatar-circle">
-                <img className="auth-avatar-img" src="/images/default-avatar.png" alt="avatar" />
-              </div>
               <p className="auth-username-text">{user?.name}</p>
               <p className="auth-success-text">You have successfully logged in</p>
             </div>
@@ -122,7 +134,7 @@ const Login = () => {
         </div>
 
         <div className="auth-image-panel">
-          <img className="auth-image" src="/images/login-bg.jpg" alt="" />
+          <AuthArt />
         </div>
       </div>
     </div>

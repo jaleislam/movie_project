@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { register, clearError } from "../redux/slices/authSlice";
+import { register, clearError, logout } from "../redux/slices/authSlice";
 import Particles from "../components/Particles";
+import AuthArt from "../components/AuthArt";
+import AvatarUpload from "../components/AvatarUpload";
 import "../styles/auth.scss";
 
 const EyeIcon = ({ open }) => (
@@ -21,14 +23,6 @@ const EyeIcon = ({ open }) => (
   </svg>
 );
 
-const AVATAR_OPTIONS = [
-  "/images/avatars/avatar1.png",
-  "/images/avatars/avatar2.png",
-  "/images/avatars/avatar3.png",
-  "/images/avatars/avatar4.png",
-  "/images/avatars/avatar5.png",
-];
-
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -40,12 +34,14 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [step, setStep] = useState("form"); // "form" | "avatar" | "success"
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
   const [localError, setLocalError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, error, user } = useSelector((state) => state.auth);
+  const location = useLocation();
+  const redirectTo = location.state?.redirectTo || "/";
+  const { isLoading, error } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -76,7 +72,12 @@ const Register = () => {
 
   const handleAvatarConfirm = () => {
     setStep("success");
-    setTimeout(() => navigate("/"), 1500);
+    setTimeout(() => {
+      dispatch(logout());
+      navigate("/login", {
+        state: { redirectTo, prefillEmail: formData.email },
+      });
+    }, 1200);
   };
 
   return (
@@ -191,26 +192,12 @@ const Register = () => {
           {step === "avatar" && (
             <div className="auth-success">
               <p className="auth-success-text">Hi {formData.username}</p>
-              <div className="auth-avatar-circle">
-                {selectedAvatar && (
-                  <img className="auth-avatar-img" src={selectedAvatar} alt="avatar" />
-                )}
-              </div>
-              <p className="auth-username-text">choose your profile</p>
+              <p className="auth-username-text">Choose your profile photo</p>
 
-              <div className="auth-avatar-grid">
-                {AVATAR_OPTIONS.map((avatar) => (
-                  <div
-                    key={avatar}
-                    className={`auth-avatar-option ${
-                      selectedAvatar === avatar ? "selected" : ""
-                    }`}
-                    onClick={() => setSelectedAvatar(avatar)}
-                  >
-                    <img src={avatar} alt="avatar option" />
-                  </div>
-                ))}
-              </div>
+              <AvatarUpload
+                preview={avatarPreview}
+                onChange={(url) => setAvatarPreview(url)}
+              />
 
               <button className="auth-submit-btn" onClick={handleAvatarConfirm}>
                 Confirm
@@ -221,20 +208,19 @@ const Register = () => {
           {step === "success" && (
             <div className="auth-success">
               <div className="auth-avatar-circle">
-                {selectedAvatar && (
-                  <img className="auth-avatar-img" src={selectedAvatar} alt="avatar" />
+                {avatarPreview && (
+                  <img className="auth-avatar-img" src={avatarPreview} alt="avatar" />
                 )}
               </div>
-              <p className="auth-username-text">{user?.name}</p>
               <p className="auth-success-text">
-                Your account has been successfully created
+                Hesab yaradildi! Indi daxil olun...
               </p>
             </div>
           )}
         </div>
 
         <div className="auth-image-panel">
-          <img className="auth-image" src="/images/login-bg.jpg" alt="" />
+          <AuthArt />
         </div>
       </div>
     </div>

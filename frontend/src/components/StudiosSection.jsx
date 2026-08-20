@@ -1,5 +1,14 @@
 const STUDIOS = [
-  "hbo", "wb", "disney", "marvel", "dc", "amc", "netflix", "paramount", "sony", "appletv",
+  { name: "HBO", color: "#1a1a1a" },
+  { name: "WB", color: "#0f4c81" },
+  { name: "Disney+", color: "#0d2340" },
+  { name: "Marvel", color: "#ed1d24" },
+  { name: "DC", color: "#0078f0" },
+  { name: "AMC", color: "#000000" },
+  { name: "Netflix", color: "#e50914" },
+  { name: "Paramount", color: "#0064ff" },
+  { name: "Sony", color: "#000000" },
+  { name: "Apple TV+", color: "#000000" },
 ];
 
 const StudiosSection = () => {
@@ -9,8 +18,8 @@ const StudiosSection = () => {
 
       <div className="studios-grid">
         {STUDIOS.map((studio) => (
-          <div key={studio} className="studio-logo">
-            <img src={`/images/studios/${studio}.png`} alt={studio} />
+          <div key={studio.name} className="studio-logo-text" style={{ background: studio.color }}>
+            {studio.name}
           </div>
         ))}
       </div>

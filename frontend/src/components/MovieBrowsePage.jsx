@@ -20,12 +20,13 @@ const MovieBrowsePage = ({ title }) => {
   const [year, setYear] = useState("");
   const [director, setDirector] = useState("");
   const [genreScrollIndex, setGenreScrollIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(16);
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const params = { limit: 30 };
+        const params = { limit: visibleCount };
         if (activeGenre) params.genre = activeGenre;
         if (searchText.trim()) params.search = searchText.trim();
         if (year) params.year = year;
@@ -43,7 +44,7 @@ const MovieBrowsePage = ({ title }) => {
     };
     const timeout = setTimeout(fetchMovies, 250);
     return () => clearTimeout(timeout);
-  }, [activeGenre, searchText, year, director]);
+  }, [activeGenre, searchText, year, director, visibleCount]);
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -146,16 +147,24 @@ const MovieBrowsePage = ({ title }) => {
       {movies.length === 0 ? (
         <p className="browse-no-results">Netice tapilmadi</p>
       ) : (
-        <div className="browse-grid">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              isInWishlist={wishlistIds.includes(movie._id)}
-              onToggleWishlist={handleToggleWishlist}
-            />
-          ))}
-        </div>
+        <>
+          <div className="browse-grid">
+            {movies.map((movie) => (
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                isInWishlist={wishlistIds.includes(movie._id)}
+                onToggleWishlist={handleToggleWishlist}
+              />
+            ))}
+          </div>
+
+          {movies.length >= visibleCount && (
+            <button className="browse-load-more" onClick={() => setVisibleCount((prev) => prev + 16)}>
+              Load More
+            </button>
+          )}
+        </>
       )}
     </div>
   );

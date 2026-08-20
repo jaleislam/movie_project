@@ -6,7 +6,6 @@ import SeriesSection from "../components/SeriesSection";
 import PricingSection from "../components/PricingSection";
 import CollectionSection from "../components/CollectionSection";
 import ContinueWatchingSection from "../components/ContinueWatchingSection";
-import CharactorsSection from "../components/CharactorsSection";
 import FaqSection from "../components/FaqSection";
 import StudiosSection from "../components/StudiosSection";
 import "../styles/hero.scss";
@@ -24,7 +23,6 @@ const Home = () => {
       <PricingSection />
       <CollectionSection />
       <ContinueWatchingSection />
-      <CharactorsSection />
       <FaqSection />
       <StudiosSection />
     </div>

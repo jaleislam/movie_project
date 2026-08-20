@@ -1,6 +1,7 @@
 .browse-page {
   padding: 3% 5% 5%;
   box-sizing: border-box;
+  margin-top: 30px;
 }
 
 .browse-page-title {
@@ -93,5 +94,23 @@
   .browse-grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 0.8rem;
+  }
+}
+.browse-load-more {
+  display: block;
+  margin: 2rem auto 0;
+  height: 44px;
+  padding: 0 2rem;
+  border-radius: 22px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+
+  &:hover {
+    border-color: var(--accent);
+    background: rgba(79, 179, 255, 0.1);
   }
 }

@@ -1,12 +1,31 @@
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Plus, Check } from "lucide-react";
 
 const MovieCard = ({ movie, isInWishlist, onToggleWishlist }) => {
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (!user) {
+      navigate("/login", { state: { redirectTo: `/movie/${movie._id}` } });
+      return;
+    }
+    navigate(`/movie/${movie._id}`);
+  };
+
   return (
-    <div className="movie-card">
+    <a href={`/movie/${movie._id}`} className="movie-card" onClick={handleClick}>
       <button
         className={`movie-card-wishlist-btn ${isInWishlist ? "added" : ""}`}
         onClick={(e) => {
+          e.preventDefault();
           e.stopPropagation();
+          if (!user) {
+            navigate("/login", { state: { redirectTo: `/movie/${movie._id}` } });
+            return;
+          }
           onToggleWishlist(movie._id);
         }}
         aria-label="Wishlist-e elave et"
@@ -19,7 +38,7 @@ const MovieCard = ({ movie, isInWishlist, onToggleWishlist }) => {
       <div className="movie-card-overlay">
         <h4>{movie.title}</h4>
       </div>
-    </div>
+    </a>
   );
 };
 
